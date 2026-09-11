@@ -1,462 +1,1059 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - BBA Finance Student</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pari | BBA Finance Portfolio</title>
+
+<style>
+
+/* ================= GENERAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Arial, Helvetica, sans-serif;
+    background:#0b1018;
+    color:#f5f5f5;
+    line-height:1.6;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:18px 7%;
+
+    background:rgba(11,16,24,0.92);
+    backdrop-filter:blur(12px);
+
+    border-bottom:1px solid rgba(255,255,255,0.08);
+}
+
+.logo{
+    font-size:25px;
+    font-weight:800;
+    color:#d8ad55;
+}
+
+nav ul{
+    display:flex;
+    gap:28px;
+    list-style:none;
+}
+
+nav ul a{
+    font-size:14px;
+    color:#ddd;
+    transition:0.3s;
+}
+
+nav ul a:hover{
+    color:#d8ad55;
+}
+
+/* ================= SECTIONS ================= */
+
+section{
+    padding:100px 8%;
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    min-height:100vh;
+
+    display:grid;
+    grid-template-columns:1.2fr 0.8fr;
+
+    gap:60px;
+    align-items:center;
+
+    padding-top:120px;
+
+    background:
+    radial-gradient(
+        circle at 80% 30%,
+        rgba(216,173,85,0.12),
+        transparent 35%
+    );
+}
+
+.tag{
+    color:#d8ad55;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:clamp(48px,7vw,82px);
+    line-height:1.05;
+    margin:15px 0;
+}
+
+.hero h1 span{
+    color:#d8ad55;
+}
+
+.hero h2{
+    font-size:22px;
+    font-weight:500;
+    color:#c9c9c9;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:650px;
+    color:#aaa;
+    font-size:17px;
+}
+
+/* ================= BUTTONS ================= */
+
+.buttons{
+    display:flex;
+    gap:15px;
+    margin-top:30px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    padding:13px 22px;
+
+    border-radius:30px;
+
+    border:1px solid #d8ad55;
+
+    color:#d8ad55;
+
+    font-weight:700;
+
+    transition:0.3s;
+}
+
+.btn.primary{
+    background:#d8ad55;
+    color:#0b1018;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 10px 25px rgba(216,173,85,0.18);
+}
+
+/* ================= PROFILE PHOTO ================= */
+
+.profile-wrap{
+    display:flex;
+    justify-content:center;
+}
+
+.profile-card{
+    width:min(390px,100%);
+
+    padding:12px;
+
+    border:1px solid rgba(216,173,85,0.45);
+
+    border-radius:28px;
+
+    background:
+    linear-gradient(
+        145deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.02)
+    );
+
+    box-shadow:
+    0 25px 70px rgba(0,0,0,0.35);
+
+    transform:rotate(2deg);
+
+    transition:0.4s;
+}
+
+.profile-card:hover{
+    transform:rotate(0deg) scale(1.02);
+}
+
+.profile-card img{
+    width:100%;
+
+    display:block;
+
+    aspect-ratio:4/5;
+
+    object-fit:cover;
+
+    border-radius:20px;
+}
+
+/* ================= SECTION TITLE ================= */
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title span{
+    color:#d8ad55;
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+.section-title h2{
+    font-size:40px;
+    margin-top:8px;
+}
+
+/* ================= CARDS ================= */
+
+.grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:22px;
+}
+
+.card{
+    background:#121a25;
+
+    border:1px solid rgba(255,255,255,0.08);
+
+    padding:28px;
+
+    border-radius:20px;
+
+    transition:0.3s;
+}
+
+.card:hover{
+    transform:translateY(-7px);
+
+    border-color:
+    rgba(216,173,85,0.45);
+}
+
+.card h3{
+    margin-bottom:10px;
+    color:#fff;
+}
+
+.card p,
+.card li{
+    color:#aaa;
+}
+
+.card ul{
+    padding-left:18px;
+}
+
+/* ================= STATS ================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+    repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:35px;
+}
+
+.stat{
+    padding:22px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    background:#121a25;
+}
+
+.stat strong{
+    display:block;
+
+    font-size:30px;
+
+    color:#d8ad55;
+}
+
+/* ================= TIMELINE ================= */
+
+.timeline{
+    max-width:900px;
+    margin:auto;
+}
+
+.timeline-item{
+    border-left:2px solid #d8ad55;
+
+    padding:
+    0 0 35px 25px;
+
+    position:relative;
+}
+
+.timeline-item:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-7px;
+
+    top:4px;
+
+    width:12px;
+
+    height:12px;
+
+    border-radius:50%;
+
+    background:#d8ad55;
+}
+
+.timeline-item h3{
+    font-size:21px;
+}
+
+.timeline-item small{
+    color:#d8ad55;
+}
+
+/* ================= PROJECTS ================= */
+
+.project-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:22px;
+}
+
+.project{
+    min-height:180px;
+}
+
+/* ================= CONTACT ================= */
+
+.contact-box{
+
+    max-width:850px;
+
+    margin:auto;
+
+    text-align:center;
+
+    background:#121a25;
+
+    border:
+    1px solid rgba(255,255,255,0.08);
+
+    padding:45px;
+
+    border-radius:25px;
+}
+
+.contact-box p{
+    color:#aaa;
+    margin:12px 0;
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    color:#888;
+
+    border-top:
+    1px solid rgba(255,255,255,0.08);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:800px){
+
+    nav{
+        padding:15px 5%;
+    }
+
+    nav ul{
+        display:none;
+    }
+
+    section{
+        padding:80px 6%;
+    }
+
+    .hero{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+    }
+
+    .hero p{
+        margin:auto;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
+
+    .profile-wrap{
+        order:-1;
+    }
+
+    .profile-card{
+        max-width:310px;
+    }
+
+    .grid,
+    .stats,
+    .project-grid{
+
+        grid-template-columns:1fr;
+    }
+}
+
+</style>
 </head>
+
+
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="logo">
-                <i class="fas fa-briefcase"></i> Portfolio
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav>
+
+    <div class="logo">
+        Pari.
+    </div>
+
+    <ul>
+
+        <li>
+            <a href="#home">Home</a>
+        </li>
+
+        <li>
+            <a href="#about">About</a>
+        </li>
+
+        <li>
+            <a href="#skills">Skills</a>
+        </li>
+
+        <li>
+            <a href="#experience">Experience</a>
+        </li>
+
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+            <a href="#contact">Contact</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero" id="home">
+
+    <div>
+
+        <div class="tag">
+            BBA Finance Student
+        </div>
+
+        <h1>
+            Hi, I'm <span>Pari</span> 👋
+        </h1>
+
+        <h2>
+            Finance Enthusiast • Business Learner • Future Financial Leader
+        </h2>
+
+        <p>
+            I’m passionate about finance, business, learning new skills
+            and turning ideas into practical solutions. I’m currently
+            building my knowledge through academics, projects, events
+            and internship experience.
+        </p>
+
+
+        <div class="buttons">
+
+            <a
+                class="btn primary"
+                href="#projects"
+            >
+                View My Work
+            </a>
+
+            <a
+                class="btn"
+                href="#contact"
+            >
+                Get In Touch
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- YOUR PHOTO -->
+
+    <div class="profile-wrap">
+
+        <div class="profile-card">
+
+            <img
+                src="profile.png"
+                alt="Pari - BBA Finance Student"
+            >
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about">
+
+    <div class="section-title">
+
+        <span>
+            01 • About Me
+        </span>
+
+        <h2>
+            A Little About Me
+        </h2>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <h3>
+                🎓 My Education
+            </h3>
+
+            <p>
+                BBA student specializing in Finance,
+                currently in my 2nd year.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                💼 My Experience
+            </h3>
+
+            <p>
+                Completed an internship at Reliance Smart Bazaar
+                and participated in college events and exhibitions.
+            </p>
+
+        </div>
+
+
+
+        <div class="card">
+
+            <h3>
+                🚀 My Goal
+            </h3>
+
+            <p>
+                To grow into a skilled finance professional
+                and build a successful career in a reputed organization.
+            </p>
+
+        </div>
+
+    </div>
+
+
+
+    <div class="stats">
+
+
+        <div class="stat">
+
+            <strong>
+                2nd
+            </strong>
+
+            Year of BBA
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <strong>
+                1+
+            </strong>
+
+            Internship Experience
+
+        </div>
+
+
+
+        <div class="stat">
+
+            <strong>
+                ∞
+            </strong>
+
+            Curiosity to Learn
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= SKILLS ================= -->
+
+<section id="skills">
+
+    <div class="section-title">
+
+        <span>
+            02 • Skills
+        </span>
+
+        <h2>
+            What I Bring
+        </h2>
+
+    </div>
+
+
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <h3>
+                💰 Finance
+            </h3>
+
+            <ul>
+
+                <li>
+                    Financial Accounting
+                </li>
+
+                <li>
+                    Investment Analysis
+                </li>
+
+                <li>
+                    Budget Planning
+                </li>
+
+                <li>
+                    Financial Reporting
+                </li>
+
             </ul>
-            <div class="theme-toggle">
-                <button id="themeToggle" class="theme-btn">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
+
         </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Hi, I'm <span class="highlight">Pari</span></h1>
-                <p class="hero-subtitle">BBA Finance Student | Finance Enthusiast | Future Financial Leader</p>
-                <p class="hero-description">Passionate about finance, investments, and creating innovative solutions. Currently in 2nd year of BBA with hands-on experience in retail finance.</p>
-                <div class="hero-buttons">
-                    <a href="#projects" class="btn btn-primary">View My Work</a>
-                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-                </div>
-            </div>
-            <div class="hero-animation">
-                <div class="floating-card">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="floating-card" style="animation-delay: 0.5s;">
-                    <i class="fas fa-wallet"></i>
-                </div>
-                <div class="floating-card" style="animation-delay: 1s;">
-                    <i class="fas fa-coins"></i>
-                </div>
-            </div>
+
+
+        <div class="card">
+
+            <h3>
+                📊 Business
+            </h3>
+
+            <ul>
+
+                <li>
+                    Market Research
+                </li>
+
+                <li>
+                    Data Analysis
+                </li>
+
+                <li>
+                    Project Management
+                </li>
+
+                <li>
+                    Business Communication
+                </li>
+
+            </ul>
+
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a passionate BBA Finance student in my 2nd year, dedicated to understanding the intricacies of finance, investments, and business operations. My journey has been marked by practical experience and a commitment to excellence.</p>
-                    
-                    <p>During my internship at <strong>Reliance Smart Bazaar</strong>, I gained valuable insights into retail finance, customer service, and operations management. This experience solidified my passion for the finance sector and helped me develop crucial business skills.</p>
-                    
-                    <p>Beyond academics and internships, I actively participate in college events, where I've developed leadership, teamwork, and communication skills. I believe in continuous learning and staying updated with market trends and financial innovations.</p>
-                    
-                    <div class="highlights">
-                        <div class="highlight-item">
-                            <i class="fas fa-graduation-cap"></i>
-                            <h4>Education</h4>
-                            <p>BBA Finance (2nd Year)</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-briefcase"></i>
-                            <h4>Experience</h4>
-                            <p>Internship at Reliance Smart Bazaar</p>
-                        </div>
-                        <div class="highlight-item">
-                            <i class="fas fa-star"></i>
-                            <h4>Focus</h4>
-                            <p>Finance & Business Growth</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+        <div class="card">
+
+            <h3>
+                💻 Digital & Soft Skills
+            </h3>
+
+            <ul>
+
+                <li>
+                    Excel & Spreadsheets
+                </li>
+
+                <li>
+                    AI Tools
+                </li>
+
+                <li>
+                    Presentation Skills
+                </li>
+
+                <li>
+                    Teamwork & Problem Solving
+                </li>
+
+            </ul>
+
         </div>
-    </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <!-- Financial Skills -->
-                <div class="skill-category">
-                    <h3>Financial Analysis</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Financial Accounting</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Investment Analysis</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Budget Planning</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 78%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Financial Reporting</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 82%"></div>
-                        </div>
-                    </div>
-                </div>
+    </div>
 
-                <!-- Business Skills -->
-                <div class="skill-category">
-                    <h3>Business Skills</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Data Analysis</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Project Management</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Business Communication</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 88%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Market Research</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 79%"></div>
-                        </div>
-                    </div>
-                </div>
+</section>
 
-                <!-- Technical Skills -->
-                <div class="skill-category">
-                    <h3>Technical Skills</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Excel & Spreadsheets</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Financial Software</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Data Visualization</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Python for Finance</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- Soft Skills -->
-                <div class="skill-category">
-                    <h3>Soft Skills</h3>
-                    <div class="skill-item">
-                        <span class="skill-name">Leadership</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Team Collaboration</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Problem Solving</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 87%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Presentation Skills</span>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 84%"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<!-- ================= EXPERIENCE ================= -->
+
+<section id="experience">
+
+    <div class="section-title">
+
+        <span>
+            03 • Experience
+        </span>
+
+        <h2>
+            My Journey
+        </h2>
+
+    </div>
+
+
+
+    <div class="timeline">
+
+
+        <div class="timeline-item">
+
+            <small>
+                INTERNSHIP
+            </small>
+
+            <h3>
+                Reliance Smart Bazaar
+            </h3>
+
+            <p>
+                Gained practical exposure to retail operations,
+                customer interaction and business processes.
+            </p>
+
         </div>
-    </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2 class="section-title">Experience & Achievements</h2>
-            
-            <div class="experience-container">
-                <!-- Reliance Internship -->
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-building"></i>
-                        </div>
-                        <div class="experience-info">
-                            <h3>Internship - Finance Operations</h3>
-                            <p class="company">Reliance Smart Bazaar</p>
-                            <p class="duration"><i class="fas fa-calendar"></i> 3-6 Months</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p class="role-description">Gained hands-on experience in retail finance and operations management.</p>
-                        <ul class="achievements">
-                            <li><i class="fas fa-check"></i> Assisted in financial analysis and reporting</li>
-                            <li><i class="fas fa-check"></i> Managed customer transactions and financial records</li>
-                            <li><i class="fas fa-check"></i> Learned retail operations and inventory management</li>
-                            <li><i class="fas fa-check"></i> Developed professionalism in a corporate environment</li>
-                            <li><i class="fas fa-check"></i> Enhanced understanding of financial processes</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <!-- College Events -->
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-trophy"></i>
-                        </div>
-                        <div class="experience-info">
-                            <h3>Active Participant - College Events</h3>
-                            <p class="company">College Competitions & Activities</p>
-                            <p class="duration"><i class="fas fa-calendar"></i> Ongoing</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p class="role-description">Leadership and teamwork in various college initiatives.</p>
-                        <ul class="achievements">
-                            <li><i class="fas fa-check"></i> Participated in finance case competitions</li>
-                            <li><i class="fas fa-check"></i> Collaborated in business plan presentations</li>
-                            <li><i class="fas fa-check"></i> Developed leadership and public speaking skills</li>
-                            <li><i class="fas fa-check"></i> Contributed to team success in multiple events</li>
-                            <li><i class="fas fa-check"></i> Networking with industry professionals</li>
-                        </ul>
-                    </div>
-                </div>
 
-                <!-- Academic Pursuits -->
-                <div class="experience-card">
-                    <div class="experience-header">
-                        <div class="experience-icon">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="experience-info">
-                            <h3>Academic Excellence</h3>
-                            <p class="company">BBA Finance Program</p>
-                            <p class="duration"><i class="fas fa-calendar"></i> 2nd Year</p>
-                        </div>
-                    </div>
-                    <div class="experience-content">
-                        <p class="role-description">Focused learning in finance, business, and management.</p>
-                        <ul class="achievements">
-                            <li><i class="fas fa-check"></i> Strong foundation in financial accounting</li>
-                            <li><i class="fas fa-check"></i> In-depth knowledge of investment principles</li>
-                            <li><i class="fas fa-check"></i> Understanding of corporate finance management</li>
-                            <li><i class="fas fa-check"></i> Business strategy and planning expertise</li>
-                            <li><i class="fas fa-check"></i> Continuous learning and skill development</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+        <div class="timeline-item">
+
+            <small>
+                COLLEGE EXPERIENCE
+            </small>
+
+            <h3>
+                Events & Exhibition Participation
+            </h3>
+
+            <p>
+                Participated in college activities that helped
+                me develop teamwork, communication and confidence.
+            </p>
+
         </div>
-    </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Projects & Work</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-                    <h3>Financial Analysis Project</h3>
-                    <p>Comprehensive analysis of a company's financial statements, including ratio analysis, trend analysis, and financial forecasting.</p>
-                    <div class="project-tags">
-                        <span>Analysis</span>
-                        <span>Accounting</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-chart-bar"></i>
-                    </div>
-                    <h3>Investment Portfolio Analysis</h3>
-                    <p>Research and analysis of various investment opportunities including stocks, bonds, and mutual funds with risk assessment.</p>
-                    <div class="project-tags">
-                        <span>Investments</span>
-                        <span>Research</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <h3>Budget Management System</h3>
-                    <p>Created a comprehensive budget planning tool for personal and business finance management with expense tracking and analysis.</p>
-                    <div class="project-tags">
-                        <span>Planning</span>
-                        <span>Excel</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
+        <div class="timeline-item">
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-coins"></i>
-                    </div>
-                    <h3>Market Research Study</h3>
-                    <p>Conducted in-depth market research on retail finance sector, analyzing trends, competitors, and consumer behavior patterns.</p>
-                    <div class="project-tags">
-                        <span>Research</span>
-                        <span>Market</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
+            <small>
+                CURRENT
+            </small>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <h3>Business Case Study</h3>
-                    <p>Detailed case study analysis of Reliance Smart Bazaar's business model, operations, and financial performance.</p>
-                    <div class="project-tags">
-                        <span>Case Study</span>
-                        <span>Business</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
+            <h3>
+                BBA Finance — 2nd Year
+            </h3>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-presentation"></i>
-                    </div>
-                    <h3>Financial Presentation</h3>
-                    <p>Comprehensive presentation on emerging trends in finance, digital banking, and fintech innovations in the industry.</p>
-                    <div class="project-tags">
-                        <span>Presentation</span>
-                        <span>Fintech</span>
-                    </div>
-                    <a href="#" class="project-link">Learn More →</a>
-                </div>
-            </div>
+            <p>
+                Developing my foundation in finance,
+                business management and professional skills.
+            </p>
+
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Get In Touch</h3>
-                    <p>I'm always interested in hearing about new opportunities and connecting with professionals in the finance industry. Feel free to reach out!</p>
-                    
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <div>
-                                <h4>Email</h4>
-                                <p>pari9026861552@gmail.com</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <div>
-                                <h4>Phone</h4>
-                                <p>+91 XXXXX XXXXX</p>
-                            </div>
-                        </div>
-                        <div class="contact-item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <div>
-                                <h4>Location</h4>
-                                <p>India</p>
-                            </div>
-                        </div>
-                    </div>
+    </div>
 
-                    <div class="social-links">
-                        <a href="#" class="social-icon" title="LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="social-icon" title="GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="#" class="social-icon" title="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="social-icon" title="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                    </div>
-                </div>
+</section>
 
-                <form class="contact-form" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" placeholder="Subject">
-                    </div>
-                    <div class="form-group">
-                        <textarea placeholder="Your Message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
-            </div>
+
+
+<!-- ================= PROJECTS ================= -->
+
+<section id="projects">
+
+    <div class="section-title">
+
+        <span>
+            04 • Projects
+        </span>
+
+        <h2>
+            Things I've Worked On
+        </h2>
+
+    </div>
+
+
+
+    <div class="project-grid">
+
+
+        <div class="card project">
+
+            <h3>
+                📈 Financial Analysis Project
+            </h3>
+
+            <p>
+                Analysis of financial information to understand
+                business performance and decision-making.
+            </p>
+
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Pari - BBA Finance Portfolio. All rights reserved.</p>
-            <p>Designed with <i class="fas fa-heart"></i> and built with modern web technologies.</p>
+
+
+        <div class="card project">
+
+            <h3>
+                💹 Investment Portfolio Analysis
+            </h3>
+
+            <p>
+                Exploring investment choices, risk and return concepts.
+            </p>
+
         </div>
-    </footer>
 
-    <script src="script.js"></script>
+
+
+        <div class="card project">
+
+            <h3>
+                💵 Budget Management System
+            </h3>
+
+            <p>
+                A simple concept for planning, tracking
+                and controlling expenses.
+            </p>
+
+        </div>
+
+
+
+        <div class="card project">
+
+            <h3>
+                🔎 Market Research Study
+            </h3>
+
+            <p>
+                Researching customer preferences
+                and market trends.
+            </p>
+
+        </div>
+
+
+
+        <div class="card project">
+
+            <h3>
+                🧠 Business Case Study
+            </h3>
+
+            <p>
+                Understanding business problems
+                and developing practical solutions.
+            </p>
+
+        </div>
+
+
+
+        <div class="card project">
+
+            <h3>
+                🎤 Financial Presentation
+            </h3>
+
+            <p>
+                Presenting finance concepts
+                in a simple and engaging way.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+    <div class="section-title">
+
+        <span>
+            05 • Contact
+        </span>
+
+        <h2>
+            Let's Connect
+        </h2>
+
+    </div>
+
+
+
+    <div class="contact-box">
+
+        <h3>
+            Have an opportunity or idea?
+        </h3>
+
+        <p>
+            I'd love to connect, learn and grow.
+        </p>
+
+        <p>
+            📧 pari9026861552@gmail.com
+        </p>
+
+        <p>
+            📍 India
+        </p>
+
+
+
+        <div
+            class="buttons"
+            style="justify-content:center"
+        >
+
+            <a
+                class="btn primary"
+                href="mailto:pari9026861552@gmail.com"
+            >
+                Email Me
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    © 2026 Pari • BBA Finance Portfolio
+
+</footer>
+
+
 </body>
 </html>
